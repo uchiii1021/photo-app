@@ -1,2 +1,10 @@
 <h1>Photos#new</h1>
-<p>Find me in app/views/photos/new.html.erb</p>
+
+<%= form_with model: @photo, local: true do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :description %>
+  <%= f.file_field :image %>
+  <%= f.submit "投稿する" %>
+<% end %>
+
+<%= link_to "戻る", photos_path %>

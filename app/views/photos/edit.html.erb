@@ -1,2 +1,10 @@
 <h1>Photos#edit</h1>
-<p>Find me in app/views/photos/edit.html.erb</p>
+
+<%= form_with model: @photo, local: true do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :description %>
+  <%= image_tag @photo.image.url %>
+  <%= f.submit "投稿する" %>
+<% end %>
+
+<%= link_to "戻る", photos_path %>

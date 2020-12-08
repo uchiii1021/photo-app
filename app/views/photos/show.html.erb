@@ -1,2 +1,8 @@
 <h1>Photos#show</h1>
-<p>Find me in app/views/photos/show.html.erb</p>
+
+
+  <%= @photo.title %>
+  <%= @photo.description %>
+  <%= image_tag @photo.image.url %>
+
+<%= link_to "戻る", photos_path %>
