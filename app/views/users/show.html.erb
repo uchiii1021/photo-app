@@ -1,0 +1,13 @@
+<h1>Users#show</h1>
+<p>名前 : <%= @user.name %></p>
+<p>メールアドレス : <%= @user.email %></p>
+<p>プロフィール : <%= @user.profile %></p>
+
+<% @photos.each do |photo| %>
+  <%= link_to photo_path(photo) do %>
+    <%= photo.title %>
+    <%= image_tag photo.image.url %>
+  <% end %>
+<% end %>
+
+<%= link_to "プロフィール編集", edit_user_registration_path %>

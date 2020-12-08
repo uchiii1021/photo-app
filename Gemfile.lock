@@ -94,6 +94,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n-views (0.3.7)
     erubi (1.10.0)
     execjs (2.7.0)
     ffi (1.13.1)
@@ -250,6 +251,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave
   devise
+  devise-i18n-views
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.2)

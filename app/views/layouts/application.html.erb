@@ -10,6 +10,23 @@
   </head>
 
   <body>
+    <header>
+      <h1>写活</h1>
+      <div>
+        <% if user_signed_in? %>
+          <%= link_to "新規投稿", new_user_registration_path %>
+          <%= link_to "ログアウト", logout_path, method: :delete %>
+          <%= link_to "マイページ", user_path(current_user.id) %>
+        <% else %>
+          <%= link_to "新規登録", new_user_registration_path %>
+          <%= link_to "ログイン", new_user_session_path %>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to "ホーム", photos_path %>
+        <%= link_to "カテゴリー", root_path %>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>
