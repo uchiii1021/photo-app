@@ -1,8 +1,20 @@
-<h1>Photos#show</h1>
-
-
+<% if user_signed_in? && current_user.id == @photo.user_id %>
+  <%= render "edit" %>
+<% else %>
+  <%= image_tag @photo.image.url %>
   <%= @photo.title %>
   <%= @photo.description %>
-  <%= image_tag @photo.image.url %>
+  <%= @photo.user.name%>
+<% end %>
 
-<%= link_to "戻る", photos_path %>
+<%= form_with model: [@photo, @comment], local: true do |f| %>
+  <%= f.text_area :comment_content, size: "40x5" %>
+  <%= f.submit '送信' %>
+<% end %>
+
+<% @comments.each do |comment| %>
+  <%= comment.user.name %>
+  <%= comment.comment_content %>
+<% end %>
+
+<%= link_to "戻る", :back %>

@@ -1,10 +1,7 @@
-<h1>Photos#edit</h1>
-
 <%= form_with model: @photo, local: true do |f| %>
+  <%= image_tag @photo.image.url %>
   <%= f.text_field :title %>
   <%= f.text_area :description %>
-  <%= image_tag @photo.image.url %>
   <%= f.submit "投稿する" %>
+  <%= link_to "削除する", photo_path(@photo), method: :delete, data: { confirm: '削除しますか？' }%>
 <% end %>
-
-<%= link_to "戻る", photos_path %>

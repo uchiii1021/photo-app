@@ -11,22 +11,43 @@
 
   <body>
     <header>
-      <h1>写活</h1>
-      <div>
-        <% if user_signed_in? %>
-          <%= link_to "新規投稿", new_user_registration_path %>
-          <%= link_to "ログアウト", logout_path, method: :delete %>
-          <%= link_to "マイページ", user_path(current_user.id) %>
-        <% else %>
-          <%= link_to "新規登録", new_user_registration_path %>
-          <%= link_to "ログイン", new_user_session_path %>
-        <% end %>
-      </div>
-      <div>
-        <%= link_to "ホーム", photos_path %>
-        <%= link_to "カテゴリー", root_path %>
+      <h1 >
+        <%= link_to "写活", photos_path, class: "logo" %>
+      </h1>
+      <div class="header-menu">
+        <ul class="my-menu">
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to "新規投稿", new_photo_path, class: "my-menu__list" %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", logout_path, method: :delete, class: "my-menu__list" %>
+            </li>
+            <li>
+              <%= link_to "マイページ", user_path(current_user.id), class: "my-menu__list" %>
+            </li>
+          <% else %>
+            <li>
+             <%= link_to "新規登録", new_user_registration_path, class: "my-menu__list" %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_user_session_path, class: "my-menu__list" %>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="top-menu">
+          <li>
+            <%= link_to "ホーム", photos_path, class: "top-menu__list" %>
+          </li>
+          <li>
+            <%= link_to "カテゴリー", root_path, class: "top-menu__list" %>
+          </li>
+        </ul>
       </div>
     </header>
-    <%= yield %>
+    <div　class="content">
+
+      <%= yield %>
+    </div>
   </body>
 </html>

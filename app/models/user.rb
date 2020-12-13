@@ -9,5 +9,6 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :profile, length: { maximum: 200 }
 
-  has_many :photos
+  has_many :photos, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end

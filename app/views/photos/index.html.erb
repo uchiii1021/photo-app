@@ -1,12 +1,27 @@
-<h1>Photos#index</h1>
-
-<% @photos.each do |photo| %>
-  <%= link_to photo_path(photo) do %>
-    <%= photo.title %>
-    <%= image_tag photo.image.url %>
+<div class="photos-box">
+  <% @photos.each do |photo| %>
+    <div class="photo-box">
+      <%= link_to photo_path(photo) do %>
+        <div>
+          <div class="photo-box__image">
+            <%= image_tag photo.image.url, class: "photo-box__image-size" %>
+          </div>
+      <% end %>
+      <%= link_to photo_path(photo) do %>
+          <p class="photo-box__title">
+            <%= photo.title%>
+          </p>
+        </div>
+      <% end %>
+      <%= link_to user_path(photo.user) do %>
+        <p class="photo-box__user-name">
+          <%= photo.user.name %>
+        </p>
+      <% end %>
+      
+      <% if user_signed_in? && current_user.id == photo.user_id %>
+        <%= link_to "削除", photo_path(photo), method: :delete, data: { confirm: '削除しますか?'} %>
+      <% end %>
+    </div>
   <% end %>
-  <%= link_to "編集", edit_photo_path(photo) %>
-  <%= link_to "削除", photo_path(photo), method: :delete, data: { confirm: '削除しますか?'} %>
-<% end %>
-
-<%= link_to "新規投稿", new_photo_path %>
+</div>
