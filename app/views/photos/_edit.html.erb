@@ -1,5 +1,4 @@
 <%= form_with model: @photo, local: true do |f| %>
-  <%= image_tag @photo.image.url %>
   <%= f.text_field :title %>
   <%= f.text_area :description %>
   <%= f.submit "投稿する" %>

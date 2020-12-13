@@ -1,20 +1,56 @@
-<% if user_signed_in? && current_user.id == @photo.user_id %>
-  <%= render "edit" %>
-<% else %>
-  <%= image_tag @photo.image.url %>
-  <%= @photo.title %>
-  <%= @photo.description %>
-  <%= @photo.user.name%>
-<% end %>
+<div class="photo-details">
+      <div class="photo-details__image-area">
+        <%= image_tag @photo.image.url, class: "photo-details__image" %>
+      </div>
+      <div class="photo-information">
+        <div class="photo-information__header">
+          <div class="photo-information__title">
+            <% if user_signed_in? && current_user.id == @photo.user_id %>
+              <%= form_with model: @photo, local: true do |f| %>
+                  <%= f.text_field :title %>
+              <% end %>
+            <% else %>
+              <%= @photo.title %>
+            <% end %>
+          </div>
+          <%= link_to user_path(@photo.user) do %>
+            <div class="photo-information__user-name">
+              <%= @photo.user.name%>
+            </div>
+          <% end %>
+          <div class="photo-information__created">
+            <%= @photo.created_at%>
+          </div>
+        </div>
 
-<%= form_with model: [@photo, @comment], local: true do |f| %>
-  <%= f.text_area :comment_content, size: "40x5" %>
-  <%= f.submit '送信' %>
-<% end %>
+        <div>
+          <% if user_signed_in? && current_user.id == @photo.user_id %>
+            <%= form_with model: @photo, local: true do |f| %>
+              <%= f.text_area :description %>
+            <% end %>
+          <% else %>
+            <%= @photo.description %>
+          <% end %>
+        </div>
+        <table>
+          <tbody>
+            <% @comments.each do |comment| %>
+              <tr>
+                <td><%= comment.user.name %></td>
+                <td><%= comment.comment_content %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
 
-<% @comments.each do |comment| %>
-  <%= comment.user.name %>
-  <%= comment.comment_content %>
-<% end %>
+        <%= form_with model: [@photo, @comment], local: true do |f| %>
+          <%= f.text_area :comment_content, size: "40x2" %>
+          <%= f.submit '送信' %>
+        <% end %>
 
-<%= link_to "戻る", :back %>
+
+        <%= link_to "戻る", :back %>
+      </div>
+
+
+</div>
