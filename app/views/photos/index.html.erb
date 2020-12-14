@@ -2,16 +2,14 @@
   <% @photos.each do |photo| %>
     <div class="photo-box">
       <%= link_to photo_path(photo) do %>
-        <div>
-          <div class="photo-box__image">
-            <%= image_tag photo.image.url, class: "photo-box__image-size" %>
-          </div>
+        <div class="photo-box__image">
+          <%= image_tag photo.image.url, class: "photo-box__image-size" %>
+        </div>
       <% end %>
       <%= link_to photo_path(photo) do %>
-          <p class="photo-box__title">
-            <%= photo.title%>
-          </p>
-        </div>
+        <p class="photo-box__title">
+          <%= photo.title%>
+        </p>
       <% end %>
       <%= link_to user_path(photo.user) do %>
         <p class="photo-box__user-name">

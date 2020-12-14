@@ -3,13 +3,29 @@
 <p>メールアドレス : <%= @user.email %></p>
 <p>プロフィール : <%= @user.profile %></p>
 
-<% @photos.each do |photo| %>
-  <div>
-    <%= link_to photo_path(photo) do %>
-      <%= image_tag photo.image.url %>
-      <%= photo.title %>
-    <% end %>
-  </div>
-<% end %>
-
+<div class="photos-box">
+  <% @photos.each do |photo| %>
+    <div class="photo-box">
+      <%= link_to photo_path(photo) do %>
+        <div class="photo-box__image">
+          <%= image_tag photo.image.url, class: "photo-box__image-size" %>
+        </div>
+      <% end %>
+      <%= link_to photo_path(photo) do %>
+        <p class="photo-box__title">
+          <%= photo.title%>
+        </p>
+      <% end %>
+      <%= link_to user_path(photo.user) do %>
+        <p class="photo-box__user-name">
+          <%= photo.user.name %>
+        </p>
+      <% end %>
+      
+      <% if user_signed_in? && current_user.id == photo.user_id %>
+        <%= link_to "削除", photo_path(photo), method: :delete, data: { confirm: '削除しますか?'} %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 <%= link_to "プロフィール編集", edit_user_registration_path %>

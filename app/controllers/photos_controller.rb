@@ -10,6 +10,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @comment = Comment.new
     @comments = @photo.comments
+    @like = Like.new
   end
 
   def new
