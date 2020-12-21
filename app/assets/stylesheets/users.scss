@@ -1,3 +1,65 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.field_with_errors {
+  display: contents;
+  color: red;
+  .input-form {
+    background-color: #ffc0cb;
+    border-color: red;
+    border-radius: 5px;
+  }
+}
+
+.error-message {
+  color: red
+}
+
+.alert {
+  color: red;
+  background-color: #ffc0cb;
+  
+}
+
+.user-forms {
+  width: 35%;
+  background: #fff;
+  margin: 110px auto 0px;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
+
+.user-title {
+  margin-bottom: 20px;
+}
+
+
+.form-group {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+.input-form {
+  width: 100%;
+}
+
+.actions {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.btn {
+  width: 100%;  
+}
+
+.btn-info {
+  margin-bottom: 10px;
+}
+
+.btn-success {
+  margin-bottom: 10px;
+}
+
+.users-information {
+  width: 100%;
+  margin-top: 100px;
+}

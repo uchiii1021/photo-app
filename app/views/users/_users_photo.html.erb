@@ -11,11 +11,11 @@
           <%= photo.title%>
         </p>
       <% end %>
-
-      <p class="photo-box__user-name">
-        <%= photo.user.name %>
-      </p>
-
+      <%= link_to user_path(photo.user) do %>
+        <p class="photo-box__user-name">
+          <%= photo.user.name %>
+        </p>
+      <% end %>
       
       <% if user_signed_in? && current_user.id == photo.user_id %>
         <%= link_to "削除", photo_path(photo), method: :delete, data: { confirm: '削除しますか?'} %>

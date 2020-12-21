@@ -33,5 +33,9 @@ class User < ApplicationRecord
   def following?(other_user)
     self.followings.include?(other_user)
   end
+
+  has_many :user_rooms, dependent: :destroy
+  has_many :rooms, through: :user_rooms
+  has_many :messages, dependent: :destroy
 end
 

@@ -1,17 +1,17 @@
 // ホームのデザイン
 .photos-box {
   width: 100%;
-  height: 800px;
+  height: auto;
   background-color:#151515;
   margin-top: 100px;
-  padding: 40px;
+  padding: 40px 0 100px;
   display: grid;
   grid-template-columns: 330px 330px 330px 330px;
   justify-content: center;
 }
 
 .photo-box {
-  height: 400px;
+  height: 350px;
   background-color: black;
   border-radius: 10px;
   box-shadow:0px 0px 5px;
@@ -44,18 +44,17 @@
 .photo-box__user-name {
   color: #c0c0c0;
   font-size: 15px;
-  &:hover { 
-    text-decoration: underline;
-  }
 }
 
-// 詳細のデザイン
+// 写真詳細のデザイン
 .photo-details {
   width: 100%;
+  height: auto;
   margin-top: 100px;
-  padding: 10px 0;
+  padding: 10px 0 100px;
 }
 
+// 画像
 .photo-details__image-area {
   width: 100%;
   height: 620px;
@@ -73,14 +72,16 @@
   }
 }
 
+// 写真情報
 .photo-information {
-  width: 80%;
+  width: 90%;
   height: 1000px;
   background-color: white;
   margin: 0 auto;
   border-radius: 10px;
 }
 
+// 写真情報のヘッダー部分
 .photo-information__header {
   width: 100%;
   height: 150px;
@@ -105,8 +106,76 @@
     text-decoration: underline;
   }
 }
+
 .photo-information__created {
   font-size: 15px;
   color: black;
   margin: 0px 10px;
+}
+
+// 写真情報のボディー部分
+.photo-information__body {
+ width: 100%;
+ padding: 10px;
+}
+
+.photo-information-area {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+// 写真の説明部分
+.photo-information__description {
+  width: 60%;
+  height: 200px;
+  resize: none;
+  // border: 1px solid black;
+}
+
+.description-input {
+  resize: none;
+}
+
+.exif-information {
+  border: 1px solid #a0a0a0;
+  margin: 0 20px;
+  border-radius: 10px;
+}
+
+.exif-title {
+  width: 100%;
+  background-color: #c0c0c0;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+.photo-exifs {
+  list-style: none;
+  padding: 10px;
+}
+
+.photo-comments {
+  width: 500px;
+  border: 1px solid black;
+}
+
+.photo-comment {
+  width: 100%;
+  height: 300px;
+  border: 1px solid black;
+  overflow: scroll;
+
+}
+
+.comment-form {
+  width: 100%;
+  display: inline-block;
+  .comment-form__input {
+    width: 100%;
+    height: 60px;
+  }
+  .comment-form__submit{
+    height: 30px;
+  }
 }

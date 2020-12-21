@@ -1,33 +1,12 @@
-<h1>ユーザ情報</h1>
-<p>名前 : <%= @user.name %></p>
-<p>メールアドレス : <%= @user.email %></p>
-<p>プロフィール : <%= @user.profile %></p>
+<div class="users-information">
+  <h1>ユーザ情報</h1>
+  <p>名前 : <%= @user.name %></p>
+  <p>メールアドレス : <%= @user.email %></p>
+  <p>自己紹介 : <%= @user.profile %></p>
 
-<%= render partial: 'follow_button', locals: {user: @user} %>
-
-<div class="photos-box">
-  <% @photos.each do |photo| %>
-    <div class="photo-box">
-      <%= link_to photo_path(photo) do %>
-        <div class="photo-box__image">
-          <%= image_tag photo.image.url, class: "photo-box__image-size" %>
-        </div>
-      <% end %>
-      <%= link_to photo_path(photo) do %>
-        <p class="photo-box__title">
-          <%= photo.title%>
-        </p>
-      <% end %>
-      <%= link_to user_path(photo.user) do %>
-        <p class="photo-box__user-name">
-          <%= photo.user.name %>
-        </p>
-      <% end %>
-      
-      <% if user_signed_in? && current_user.id == photo.user_id %>
-        <%= link_to "削除", photo_path(photo), method: :delete, data: { confirm: '削除しますか?'} %>
-      <% end %>
-    </div>
-  <% end %>
+  <%= render partial: 'follow_button', locals: {user: @user} %>
+  <%= render partial: 'dm' %>
+  
+  <%= render partial: 'users_photo' %>
+  <%= link_to "プロフィール編集", edit_user_registration_path %>
 </div>
-<%= link_to "プロフィール編集", edit_user_registration_path %>

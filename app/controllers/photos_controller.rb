@@ -1,4 +1,5 @@
 class PhotosController < ApplicationController
+
   before_action :authenticate_user!, only: [ :new, :create, :update, :edit, :update, :destroy ]
   before_action :set_photo, only: [ :show, :edit, :update, :destroy ]
 
@@ -10,7 +11,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @comment = Comment.new
     @comments = @photo.comments
-    @like = Like.new
+    @photo_exif = MiniExiftool.new(@photo.image.file.file)
   end
 
   def new

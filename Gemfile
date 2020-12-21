@@ -61,5 +61,8 @@ gem 'devise-i18n-views'
 
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'mini_exiftool'
 
 gem 'devise'
+
+gem 'pry-rails'
