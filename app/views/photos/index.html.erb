@@ -1,25 +1,26 @@
-<div class="photos-box">
-  <% @photos.each do |photo| %>
-    <div class="photo-box">
-      <%= link_to photo_path(photo) do %>
-        <div class="photo-box__image">
-          <%= image_tag photo.image.url, class: "photo-box__image-size" %>
-        </div>
-      <% end %>
-      <%= link_to photo_path(photo) do %>
-        <p class="photo-box__title">
-          <%= photo.title%>
+<div class="page">
+  <div class="photos-box">
+    <% @photos.each do |photo| %>
+      <div class="photo-box">
+        <%= link_to photo_path(photo) do %>
+          <div class="photo-box__image">
+            <%= image_tag photo.image.url, class: "photo-box__image-size" %>
+          </div>
+        <% end %>
+        <%= link_to photo_path(photo) do %>
+          <p class="photo-box__title">
+            <%= photo.title%>
+          </p>
+        <% end %>
+
+        <p class="photo-box__user-name">
+          <%= photo.user.name %>
         </p>
-      <% end %>
 
-      <p class="photo-box__user-name">
-        <%= photo.user.name %>
-      </p>
-
-      
-      <% if user_signed_in? && current_user.id == photo.user_id %>
-        <%= link_to "削除", photo_path(photo), method: :delete, data: { confirm: '削除しますか?'} %>
-      <% end %>
-    </div>
-  <% end %>
+        <% if user_signed_in? && current_user.id == photo.user_id %>
+          <%= link_to "削除", photo_path(photo), method: :delete, data: { confirm: '削除しますか?'}, class: "link-delete" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

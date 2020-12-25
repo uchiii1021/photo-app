@@ -1,0 +1,23 @@
+<div class="page">
+  <div class="forms">
+    <h1 class="form-title">カテゴリー作成</h1>
+
+    <div class="category-form">
+      <%= form_with model: @category, local: true do |f| %>
+        <div class="category-field form-group">
+          <%= f.label :category_name %>
+          <%= f.text_field :category_name %>
+        </div>
+
+        <div class="category-field form-group">
+          <%= f.label :category_image %>
+          <%= f.file_field :category_image %>
+        </div>
+
+        <%= f.submit "作成する", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+
+    <%= link_to "戻る", :back %>
+  </div>
+</div>

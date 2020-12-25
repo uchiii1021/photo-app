@@ -1,0 +1,31 @@
+<div class="page">
+  <div class="page-header">
+    <h1 class="page-title"><%= @category.category_name%></h1>
+  </div>
+  <div class="photos-box">
+    <% @items.each do |item| %>
+      <div class="photo-box">
+        <%= link_to photo_path(item.photo) do %>
+          <div class="photo-box__image">
+            <%= image_tag item.photo.image.url, class: "photo-box__image-size" %>
+          </div>
+        <% end %>
+        <%= link_to photo_path(item.photo) do %>
+          <p class="photo-box__title">
+            <%= item.photo.title%>
+          </p>
+        <% end %>
+
+        <p class="photo-box__user-name">
+          <%= item.photo.user.name %>
+        </p>
+
+        
+        <% if user_signed_in? && current_user.id == item.photo.user_id %>
+          <%= link_to "削除", photo_path(item.photo), method: :delete, data: { confirm: '削除しますか?'}, class: "link-delete" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

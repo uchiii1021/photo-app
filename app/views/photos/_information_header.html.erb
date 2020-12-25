@@ -3,7 +3,8 @@
     <div class="photo-information__title">
       <% if user_signed_in? && current_user.id == @photo.user_id %>
         <%= form_with model: @photo, local: true do |f| %>
-            <%= f.text_field :title %>
+          <%= f.text_field :title %>
+          <%= f.submit '更新する' %>
         <% end %>
       <% else %>
         <%= @photo.title %>

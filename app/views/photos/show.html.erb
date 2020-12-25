@@ -1,63 +1,107 @@
-<div class="photo-details">
-      <div class="photo-details__image-area">
-        <%= image_tag @photo.image.url, class: "photo-details__image" %>
-      </div>
-      <div class="photo-information">
-        <%= render "photos/information_header" %>
-
-
-        <div class="photo-information__body">
-          <div class="photo-information-area">
-            <div class="photo-information__description">
-              <% if user_signed_in? && current_user.id == @photo.user_id %>
-                <%= form_with model: @photo, local: true do |f| %>
-                  <%= f.text_area :description, size: "90x5", class: "description-input" %>
-                <% end %>
-              <% else %>
-                <%= @photo.description %>
-              <% end %>
-            </div>
-
-            <div class="exif-information">
-              <h4 class="exif-title">Exif情報</h3>
-              <ul class="photo-exifs">
-                <li class="photo-exif"><%= "メーカ：#{@photo_exif.make}" %></li>
-                <li class="photo-exif"><%= "モデル：#{@photo_exif.model}" %></li>
-                <li class="photo-exif"><%= "撮影日：#{@photo_exif.date_time_original.strftime("%Y-%m-%d %H:%M:%S")}" %></li>
-                <li class="photo-exif"><%= "シャッタースピード：#{@photo_exif.exposure_time}" %></li>
-                <li class="photo-exif"><%= "F値：#{@photo_exif.f_number}" %></li>
-                <li class="photo-exif"><%= "焦点距離：#{@photo_exif.focal_length}" %></li>
-                <li class="photo-exif"><%= "ISO感度：#{@photo_exif.iso}" %></li>
-              </ul>
-            </div>
+<div class="page">
+  <div class="photo-details__image-area">
+    <%= image_tag @photo.image.url, class: "photo-details__image" %>
+  </div>
+  <div class="photo-information">
+    <div class="photo-information__header">
+      <div class="photo-information__header-right">
+        <%= link_to user_path(@photo.user) do %>
+          <div class="photo-information__user-name">
+            <%= @photo.user.name%>
           </div>
-          <div class="photo-comments">
-            <p>この写真へのコメント</p>
-            <div class="photo-comment">
-              <table>
-                <tbody>
-                  <% @comments.each do |comment| %>
-                    <tr>
-                      <td><%= comment.user.name %></td>
-                      <td><%= comment.comment_content %></td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-              </div>
-            
-              <%= form_with model: [@photo, @comment], local: true do |f| %>
-                <div class="comment-form">
-                <%= f.text_area :comment_content, class: "comment-form__input" %>
-                <%= f.submit 'コメントを送信する', class: "comment-form__submit" %>
-                </div>
-              <% end %>
-            
-          </div>
-         
-          <%= link_to "戻る", :back %>
-          
+        <% end %>
+        <div class="photo-information__created">
+          <%= @photo.created_at.strftime("%Y-%m-%d %H:%M") %>
         </div>
-        
       </div>
+      <div class="photo-information__header-left">
+        <div  class="like-goods">
+          <% if user_signed_in? %>
+            <% if current_user.already_liked?(@photo) %>
+              <%= link_to photo_like_path(@photo), method: :delete do %>
+                <i class="fas fa-thumbs-up unlike-btn"></i>
+              <% end %>
+            <% else %>
+              <%= link_to photo_likes_path(@photo), method: :post do %>
+                <i class="fas fa-thumbs-up like-btn"></i>
+              <% end %>
+            <% end %>
+          <% else %>
+            <div class="like-good">
+              <i class="fas fa-thumbs-up like-btn"></i>
+            </div>
+          <% end %>
+          <div class="like-count">
+            <%= @photo.likes.count %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="photo-information__body">
+      <div class="photo-information-area">
+        <%= form_with model: @photo, local: true do |f| %>
+          <div class="photo-information__title">
+            <% if user_signed_in? && current_user.id == @photo.user_id %>
+              <%= f.text_field :title %>
+            <% else %>
+              <%= @photo.title %>
+            <% end %>
+          </div>
+          <div class="photo-information__description">
+            <% if user_signed_in? && current_user.id == @photo.user_id %>
+              <%= f.text_area :description, size: "90x5", class: "description-input" %>
+              <div class="photo-category">
+                <%= f.label :category, 'カテゴリ' %><br />
+                <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name) do |category| %> 
+                  <%= category.label do %>
+                    <%= category.check_box %>
+                    <%= category.text %>
+                  <% end %>
+                <% end %>
+              </div>
+              <%= f.submit '更新する', class:"btn btn-primary" %>
+            <% else %>
+              <%= @photo.description %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="exif-information">
+        <h4 class="exif-title">Exif情報</h4>
+        <ul class="photo-exifs">
+          <li class="photo-exif"><%= "メーカ：#{@photo_exif.make}" %></li>
+          <li class="photo-exif"><%= "モデル：#{@photo_exif.model}" %></li>
+          <li class="photo-exif"><%= "撮影日：#{@photo_exif.date_time_original.strftime("%Y-%m-%d %H:%M:%S")}" %></li>
+          <li class="photo-exif"><%= "シャッタースピード：#{@photo_exif.exposure_time}" %></li>
+          <li class="photo-exif"><%= "F値：#{@photo_exif.f_number}" %></li>
+          <li class="photo-exif"><%= "焦点距離：#{@photo_exif.focal_length}" %></li>
+          <li class="photo-exif"><%= "ISO感度：#{@photo_exif.iso}" %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="photo-comments">
+      <h4 class="comments-title">この写真へのコメント</h4>
+      <div class="photo-comment">
+        <% @comments.each do |comment| %>
+          <div>
+            <%= comment.user.name %><br />
+            <p><%= comment.comment_content %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="comment-form">
+      <%= form_with model: [@photo, @comment], local: true do |f| %>
+        <%= f.text_area :comment_content, class: "comment-form__input" %>
+        <%= f.submit 'コメントを送信する', class:"btn btn-primary" %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= link_to "戻る", :back %>
+    </div>
+  </div>
 </div>

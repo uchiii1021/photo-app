@@ -30,7 +30,7 @@ class PhotosController < ApplicationController
 
   def update
     @photo.update(photo_params)
-    redirect_to photos_url @photo
+    redirect_to photo_url @photo
   end
 
   def destroy
@@ -41,7 +41,7 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:title, :description, :image, :remove_image, :user_id)
+    params.require(:photo).permit(:title, :description, :image, :remove_image, :user_id, {category_ids: []})
   end
 
   def set_photo

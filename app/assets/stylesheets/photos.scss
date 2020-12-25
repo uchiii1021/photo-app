@@ -2,9 +2,6 @@
 .photos-box {
   width: 100%;
   height: auto;
-  background-color:#151515;
-  margin-top: 100px;
-  padding: 40px 0 100px;
   display: grid;
   grid-template-columns: 330px 330px 330px 330px;
   justify-content: center;
@@ -31,6 +28,10 @@
   }
 }
 
+.photo-box__head {
+  display: flex;
+  justify-content: space-between;
+}
 
 .photo-box__title {
   color: #c0c0c0;
@@ -46,7 +47,7 @@
   font-size: 15px;
 }
 
-// 写真詳細のデザイン
+// ---------------写真詳細のデザイン---------------
 .photo-details {
   width: 100%;
   height: auto;
@@ -57,37 +58,38 @@
 // 画像
 .photo-details__image-area {
   width: 100%;
-  height: 620px;
+  height: auto;
   margin: 10px 0;
   text-align: center;
   // border: 1px solid black;
   .photo-details__image {
-    width: 70%;
+    width: 60%;
     height: auto;
-    max-height: 620px;
+    max-height: 600px;
     object-fit: cover;
     object-position: center;
-    box-shadow:0px 0px 5px;
-    border-radius: 10px;
+    box-shadow:0px 0px 5px white;
+    border-radius: 5px;
   }
 }
 
 // 写真情報
 .photo-information {
   width: 90%;
-  height: 1000px;
+  height: auto;
   background-color: white;
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 // 写真情報のヘッダー部分
 .photo-information__header {
   width: 100%;
-  height: 150px;
+  height: 100px;
   padding: 10px;
   background-color: #c0c0c0;
-  border-radius: 10px 10px 0 0;
+  border-bottom: 10px solid #151515;
+  border-radius: 5px 5px 0 0;
   display: flex;
   justify-content: space-between;
 }
@@ -113,22 +115,44 @@
   margin: 0px 10px;
 }
 
+.like-goods {
+  display: flex;
+  margin-right: 10px;
+}
+
+.like-count {
+  font-size: 20px;
+  margin-top: 15px;
+  margin-left: 5px;
+}
+
+.like-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  color: black; 
+  margin-top: 10px;
+  }
+ 
+ .unlike-btn {
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  color: #ff7f00;
+  margin-top: 10px;
+  }
+
 // 写真情報のボディー部分
 .photo-information__body {
  width: 100%;
- padding: 10px;
-}
-
-.photo-information-area {
-  display: flex;
-  justify-content: space-between;
-
+ padding: 20px;
+ display: flex;
+ justify-content: space-between;
 }
 
 // 写真の説明部分
 .photo-information__description {
-  width: 60%;
-  height: 200px;
+  margin-bottom: 20px;
   resize: none;
   // border: 1px solid black;
 }
@@ -138,8 +162,8 @@
 }
 
 .exif-information {
+  width: 350px;
   border: 1px solid #a0a0a0;
-  margin: 0 20px;
   border-radius: 10px;
 }
 
@@ -157,23 +181,34 @@
 
 .photo-comments {
   width: 500px;
-  border: 1px solid black;
+  border: 1px solid #a0a0a0;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.comments-title {
+  width: 100%;
+  background-color: #c0c0c0;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 .photo-comment {
   width: 100%;
   height: 300px;
-  border: 1px solid black;
+  padding: 0 5px 10px;
   overflow: scroll;
 
 }
 
 .comment-form {
-  width: 100%;
+  width: 500px;
   display: inline-block;
+  margin: 0 20px 20px;
   .comment-form__input {
     width: 100%;
     height: 60px;
+    resize: none;
   }
   .comment-form__submit{
     height: 30px;

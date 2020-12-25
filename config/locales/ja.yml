@@ -7,6 +7,15 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      category:
+        category_name: "カテゴリ名"
+        category_image: "カテゴリの画像"
+      photo:
+        title: "タイトル"
+        description: "説明"
+        image: "画像"
+        category: "カテゴリ"
   date:
     abbr_day_names:
     - 日

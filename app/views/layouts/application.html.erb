@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
   </head>
 
   <body>
@@ -17,31 +18,17 @@
       <div class="header-menu">
         <ul class="my-menu">
           <% if user_signed_in? %>
-            <li>
-              <%= link_to "新規投稿", new_photo_path, class: "my-menu__list" %>
-            </li>
-            <li>
-              <%= link_to "ログアウト", logout_path, method: :delete, class: "my-menu__list" %>
-            </li>
-            <li>
-              <%= link_to "マイページ", user_path(current_user.id), class: "my-menu__list" %>
-            </li>
+            <li><%= link_to "新規投稿", new_photo_path, class: "my-menu__list" %></li>
+            <li><%= link_to "ログアウト", logout_path, method: :delete, class: "my-menu__list" %></li>
+            <li><%= link_to "マイページ", user_path(current_user.id), class: "my-menu__list" %></li>
           <% else %>
-            <li>
-             <%= link_to "新規登録", new_user_registration_path, class: "my-menu__list" %>
-            </li>
-            <li>
-              <%= link_to "ログイン", new_user_session_path, class: "my-menu__list" %>
-            </li>
+            <li><%= link_to "新規登録", new_user_registration_path, class: "my-menu__list" %></li>
+            <li><%= link_to "ログイン", new_user_session_path, class: "my-menu__list" %></li>
           <% end %>
         </ul>
         <ul class="top-menu">
-          <li>
-            <%= link_to "ホーム", photos_path, class: "top-menu__list" %>
-          </li>
-          <li>
-            <%= link_to "カテゴリー", root_path, class: "top-menu__list" %>
-          </li>
+          <li><%= link_to "ホーム", photos_path, class: "top-menu__list" %></li>
+          <li><%= link_to "カテゴリー", categories_path, class: "top-menu__list" %></li>
         </ul>
       </div>
     </header>

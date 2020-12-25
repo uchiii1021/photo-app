@@ -1,3 +1,47 @@
-// Place all the styles related to the rooms controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.room-form {
+  width: 50%;
+  background: #fff;
+  padding: 30px 20px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
+
+.form-title {
+  margin-bottom: 20px;
+}
+
+.room-user {
+  font-size: 25px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid black;
+}
+
+.right-messages {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.right-message {
+  text-align: left;
+  margin-left: 50%;
+}
+
+.left-messages {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.left-message {
+  text-align: left;
+  margin-right: 50%;
+}
+
+.message {
+  font-size: 16px;
+  padding: 10px;
+  background-color: #c0c0c0;
+  border-radius: 5px;
+  display: inline-block;
+}

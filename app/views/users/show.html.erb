@@ -1,12 +1,52 @@
-<div class="users-information">
-  <h1>ユーザ情報</h1>
-  <p>名前 : <%= @user.name %></p>
-  <p>メールアドレス : <%= @user.email %></p>
-  <p>自己紹介 : <%= @user.profile %></p>
+<div class="page">
+  <div class="users-header">
+    <h1 class="users-title">ユーザ情報</h1>
+    <div class="users-information">
+      <div class="users-image">
+        <% if @user.image? %>
+          <%= image_tag @user.image.url, class: "user-image-size" %>
+        <% else %>
+          <%= image_tag "/assets/default.png", class: "user-image-size" %>
+        <% end %>
+      </div>
+      <div class="user-information">
+        <h4><%= @user.name %></h4>
+        <% if @user.profile? %>
+          <%=safe_join(@user.profile.split("\n"),tag(:br))%>
+        <% end %>
+      </div>
+    </div>
+    <div class="user-btns">
+      <%= render partial: 'follow_button', locals: {user: @user} %>
+      <%= render partial: 'dm' %>
+      <% if user_signed_in? && @user.id == current_user.id %>
+        <%= link_to 'プロフィール編集', edit_user_registration_path %>
+      <% end %>
+    </div>
+  </div>
 
-  <%= render partial: 'follow_button', locals: {user: @user} %>
-  <%= render partial: 'dm' %>
-  
-  <%= render partial: 'users_photo' %>
-  <%= link_to "プロフィール編集", edit_user_registration_path %>
+  <div class="tabs">
+    <input id="my-photo" type="radio" name="tab_item" checked>
+    <label class="tab_item" for="my-photo">マイフォト</label>
+    <input id="follow" type="radio" name="tab_item">
+    <label class="tab_item" for="follow">フォロー</label>
+    <input id="follower" type="radio" name="tab_item">
+    <label class="tab_item" for="follower">フォロワー</label>
+
+    <div class="tab_content" id="my-photo__content">
+      <div class="tab_content_description">
+        <%= render partial: 'users_photo' %>
+      </div>
+    </div>
+    <div class="tab_content" id="follow__content">
+      <div class="tab_content_description">
+        <%= render partial: 'follow' %>
+      </div>
+    </div>
+    <div class="tab_content" id="follower__content">
+      <div class="tab_content_description">
+        <%= render partial: 'follower' %>
+      </div>
+    </div>
+  </div>
 </div>

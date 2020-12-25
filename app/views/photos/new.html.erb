@@ -1,10 +1,36 @@
-<h1>Photos#new</h1>
+<div class="page">
+  <div class="forms">
+  <h1 class="form-title">新規投稿</h1>
 
-<%= form_with model: @photo, local: true do |f| %>
-  <%= f.text_field :title %>
-  <%= f.text_area :description %>
-  <%= f.file_field :image %>
-  <%= f.submit "投稿する" %>
-<% end %>
+  <%= form_with model: @photo, local: true do |f| %>
+    <div class="field form-group">
+      <%= f.label :title %><br />
+      <%= f.text_field :title, autofocus: true, autocomplete: "title", class: "input-field" %>
+    </div> 
 
-<%= link_to "戻る", photos_path %>
+    <div class="field form-group">
+      <%= f.label :description %><br />
+      <%= f.text_area :description, autofocus: true, autocomplete: "description", class: "input-area" %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :image %><br />
+      <%= f.file_field :image, autofocus: true, autocomplete: "image", class: "input-field" %>
+    </div>
+
+    <div class="field form-group">
+      <%= f.label :category %><br />
+      <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name) do |category| %> 
+        <%= category.label do %>
+          <%= category.check_box %>
+          <%= category.text %>
+        <% end %>
+    <% end %>
+    </div>
+
+    <%= f.submit "投稿する", class: "btn btn-primary" %>
+  <% end %>
+
+  <%= link_to "戻る", photos_path %>
+  </div>
+</div>

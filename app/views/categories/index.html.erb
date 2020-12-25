@@ -1,0 +1,30 @@
+<div class="page">
+  <div class="page-header">
+    <h1 class="page-title">カテゴリ　一覧</h1>
+    <%= link_to "カテゴリ新規作成", new_category_path, class: "link-create-category" %>
+  </div>
+
+  <div class="categories">
+    <% @categories.each do |category| %>
+      <div class="category">
+        <%= link_to category_path(category) do %>
+          <div class="category__image">
+            <%= image_tag category.category_image.url, class: "category__image-size" %>
+          </div>
+        <% end %>
+        <%= link_to category_path(category) do %>
+          <p class="category__title">
+            <%= category.category_name%>
+          </p>
+        <% end %>
+        
+        <div class="link">
+          <% if user_signed_in? && current_user.admin? %>
+            <%= link_to "編集", edit_category_path(category), class: "link-edit" %>
+            <%= link_to "削除", category_path(category), method: :delete, data: { confirm: '削除しますか?'}, class: "link-delete" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

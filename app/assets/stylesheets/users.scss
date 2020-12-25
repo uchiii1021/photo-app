@@ -18,16 +18,17 @@
   
 }
 
-.user-forms {
+// ---------------ユーザーフォームのデザイン---------------
+.forms {
   width: 35%;
   background: #fff;
-  margin: 110px auto 0px;
   padding: 30px 20px;
+  margin: 0 auto;
   border-radius: 10px;
   box-shadow: 0 0 10px gray;
 }
 
-.user-title {
+.form-title {
   margin-bottom: 20px;
 }
 
@@ -37,8 +38,14 @@
   padding-bottom: 5px;
 }
 
-.input-form {
+.input-field {
   width: 100%;
+}
+
+.input-area {
+  resize: none;
+  width: 100%;
+  height: 100px;
 }
 
 .actions {
@@ -59,7 +66,111 @@
   margin-bottom: 10px;
 }
 
+// ---------------ユーザ情報画面---------------
+
+// ユーザ情報上部
+.users-header {
+  width: 90%;
+  height: 300px;
+  margin: 0 auto 20px;
+  padding: 10px 0 10px 20px;
+  background-color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 10px;
+}
+
+.users-title {
+  color: white;
+  margin-bottom: 10px;
+}
+
 .users-information {
-  width: 100%;
-  margin-top: 100px;
+  display: flex;
+}
+
+.users-image {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 5px;
+  margin-right: 20px;
+  .user-image-size {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: cover;
+    box-shadow: 0 0 2px white;
+  }
+}
+
+.users-information {
+  font-size: 16px;
+  color: white;
+}
+
+.user-btns {
+  display: flex;
+}
+
+.user-btn {
+  width: 150px;
+  margin: 10px 10px 10px 0;
+}
+
+// タブ切り替え
+.tabs {
+  width: 90%;
+  margin: 20px auto 0;
+  border-radius: 5px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+// タブのスタイル
+.tab_item {
+  width: 150px;
+  height: 50px;
+  margin-top: 10px;
+  margin-right: 20px;
+  background-color: black;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color:white;
+  display: inline-block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  border-radius: 5px;
+  box-shadow: 0 0 1px gray;
+}
+
+.tabs input:checked + .tab_item {
+  background-color: white;
+  color: black;
+}
+
+.tab_item:hover {
+  opacity: 0.5;
+}
+
+input[name="tab_item"] {
+  display: none;
+}
+
+// タブの中身
+.tab_content {
+  display: none;
+  clear: both;
+  overflow: hidden;
+  border-radius: 0 5px 5px 5px;
+}
+
+
+#my-photo:checked ~ #my-photo__content,
+#follow:checked ~ #follow__content,
+#follower:checked ~ #follower__content {
+  display: block;
 }
