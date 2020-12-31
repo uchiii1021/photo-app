@@ -62,7 +62,13 @@ gem 'devise-i18n-views'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'mini_exiftool'
+gem 'rmagick'
 
 gem 'devise'
 
 gem 'pry-rails'
+
+gem "gmaps4rails"
+gem "geocoder"
+gem "gon"
+gem "dotenv-rails"

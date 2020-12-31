@@ -22,6 +22,15 @@
 .forms {
   width: 35%;
   background: #fff;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
+
+.forms-verify {
+  width: 50%;
+  background: #fff;
   padding: 30px 20px;
   margin: 0 auto;
   border-radius: 10px;
@@ -46,6 +55,20 @@
   resize: none;
   width: 100%;
   height: 100px;
+}
+
+.form-image {
+  padding: 5px;
+  background-color: #eeeeee;
+  border: 1px solid black;
+  border-radius: 3px;
+  &:hover { 
+    background-color: #e5e5e5;
+  }
+}
+
+.field-image {
+  display: none;
 }
 
 .actions {

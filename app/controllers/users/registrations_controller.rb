@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
@@ -29,6 +28,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def verify
+  end
+
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to
@@ -55,8 +57,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    verify_path
+  end
 
   #更新（編集の反映）時にパスワード入力を省く
   def update_resource(resource, params)
@@ -67,4 +70,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(resource)
     user_path(current_user.id)
   end
+
+
 end

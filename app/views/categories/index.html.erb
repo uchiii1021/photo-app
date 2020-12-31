@@ -1,7 +1,9 @@
 <div class="page">
   <div class="page-header">
     <h1 class="page-title">カテゴリ　一覧</h1>
-    <%= link_to "カテゴリ新規作成", new_category_path, class: "link-create-category" %>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to "カテゴリ新規作成", new_category_path, class: "link-create-category" %>
+    <% end %>
   </div>
 
   <div class="categories">
@@ -14,7 +16,7 @@
         <% end %>
         <%= link_to category_path(category) do %>
           <p class="category__title">
-            <%= category.category_name%>
+            <%= category.category_name %>
           </p>
         <% end %>
         

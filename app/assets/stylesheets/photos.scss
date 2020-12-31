@@ -1,9 +1,10 @@
-// ホームのデザイン
+// ---------------ホームのデザイン---------------
 .photos-box {
   width: 100%;
   height: auto;
+  margin: 10px;
   display: grid;
-  grid-template-columns: 330px 330px 330px 330px;
+  grid-template-columns: 320px 320px 320px 320px;
   justify-content: center;
 }
 
@@ -48,24 +49,18 @@
 }
 
 // ---------------写真詳細のデザイン---------------
-.photo-details {
-  width: 100%;
-  height: auto;
-  margin-top: 100px;
-  padding: 10px 0 100px;
-}
 
 // 画像
-.photo-details__image-area {
+.photo-content__images {
   width: 100%;
   height: auto;
   margin: 10px 0;
   text-align: center;
   // border: 1px solid black;
-  .photo-details__image {
-    width: 60%;
+  .photo-content__image {
+    width: 65%;
     height: auto;
-    max-height: 600px;
+    max-height: 700px;
     object-fit: cover;
     object-position: center;
     box-shadow:0px 0px 5px white;
@@ -74,16 +69,17 @@
 }
 
 // 写真情報
-.photo-information {
+.photo-content {
   width: 90%;
   height: auto;
   background-color: white;
   margin: 0 auto;
+  padding-bottom: 20px;
   border-radius: 5px;
 }
 
-// 写真情報のヘッダー部分
-.photo-information__header {
+// 写真情報の上部部分
+.photo-content__top {
   width: 100%;
   height: 100px;
   padding: 10px;
@@ -94,13 +90,7 @@
   justify-content: space-between;
 }
 
-.photo-information__title {
-  font-size: 30px;
-  color: black;
-  margin-bottom: 10px;
-}
-
-.photo-information__user-name {
+.photo-content__user-name {
   font-size: 20px;
   color: blue;
   margin: 5px 10px;
@@ -109,8 +99,7 @@
   }
 }
 
-.photo-information__created {
-  font-size: 15px;
+.photo-content__created {
   color: black;
   margin: 0px 10px;
 }
@@ -142,33 +131,69 @@
   margin-top: 10px;
   }
 
-// 写真情報のボディー部分
-.photo-information__body {
+// 写真情報のメイン部分
+.photo-content__main {
  width: 100%;
  padding: 20px;
  display: flex;
  justify-content: space-between;
 }
 
+// 写真の説明部分(上部)
+.photo-content__main-top {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
 // 写真の説明部分
-.photo-information__description {
+.photo-content__information {
+  width: 750px;
   margin-bottom: 20px;
+}
+
+.photo-content__title {
+  width: 100%;
+  height: 70px;
+  font-size: 30px;
+  padding: 10px;
+}
+
+.photo-content__description {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 20px;
+  padding: 10px;
   resize: none;
-  // border: 1px solid black;
 }
 
 .description-input {
+  width: 100%;
+  height: 180px;
   resize: none;
 }
 
+.photo-categories {
+  width: 100%;
+  margin: 10px;
+}
+
+.photo-category {
+  font-size: 25px;
+
+}
+
+// Exif情報
 .exif-information {
-  width: 350px;
+  width: 400px;
+  height: 350px;
   border: 1px solid #a0a0a0;
   border-radius: 10px;
 }
 
 .exif-title {
   width: 100%;
+  font-size: 25px;
   background-color: #c0c0c0;
   padding: 10px;
   border-radius: 10px 10px 0 0;
@@ -179,32 +204,78 @@
   padding: 10px;
 }
 
-.photo-comments {
+.photo-information__body-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo-content__main-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+// 地図
+.photo-spot {
+  width: 700px;
+  margin: 10px 20px;
+}
+
+.spot-title {
+  width: 100%;
+  font-size: 25px;
+  padding: 10px;
+}
+
+.spot-address {
+  margin: 10px;
+}
+
+#spot_map {
+  width: 680px;
+  height: 450px;
+  margin: 10px;
+}
+
+// コメント
+.photo-comment-boxs {
   width: 500px;
+  margin: 20px;
+}
+
+.photo-comment-box {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 10px;
   border: 1px solid #a0a0a0;
   border-radius: 10px;
-  margin: 20px;
 }
 
 .comments-title {
   width: 100%;
+  height: 50px;
+  font-size: 25px;
   background-color: #c0c0c0;
   padding: 10px;
   border-radius: 10px 10px 0 0;
 }
 
-.photo-comment {
+.photo-comments {
   width: 100%;
-  height: 300px;
-  padding: 0 5px 10px;
+  height: 320px;
+  margin: 10px;
+  padding-right: 10px;
   overflow: scroll;
+}
 
+.photo-comment-user {
+  width: 100px;
+  color: blue;
+  margin-right: 20px;
 }
 
 .comment-form {
-  width: 500px;
+  width: 100%;
   display: inline-block;
-  margin: 0 20px 20px;
   .comment-form__input {
     width: 100%;
     height: 60px;
@@ -212,5 +283,42 @@
   }
   .comment-form__submit{
     height: 30px;
+  }
+}
+
+.link_back {
+  margin: 20px;
+}
+
+// ---------------新規投稿のデザイン---------------
+.spot {
+  margin-bottom: 20px;
+}
+
+.spot__title {
+  margin-bottom: 10px;
+}
+
+.spot__text {
+  margin-bottom: 10px;
+}
+
+#map {
+  height: 300px;
+}
+
+.new-photo__link-back {
+  margin-top: 10px;
+}
+
+.photo-alert {
+  color: red;
+  background-color: #ffc0cb;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid red;
+  li {
+    list-style: none;
   }
 }

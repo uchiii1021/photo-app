@@ -5,10 +5,15 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 10 }
   validates :profile, length: { maximum: 200 }
+  validate :password_complexity
+  def password_complexity
+    return if password.blank? || password =~ /^(?=.*?[a-z])(?=.*?[0-9]).{6,20}$/
+    errors.add :password, 'の長さは6文字から20文字の間にして下さい。半角英字小文字(a-z)、数字(0-9)を少なくともひとつずつ組み合わせてください。'
+  end
 
   has_many :photos, dependent: :destroy
   has_many :comments, dependent: :destroy

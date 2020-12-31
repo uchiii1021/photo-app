@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get '/users', to: redirect("/users/sign_up")
+    get "verify", :to => "users/registrations#verify"
     get "login", :to => "users/sessions#new"
     delete "logout", :to => "users/sessions#destroy"
   end
