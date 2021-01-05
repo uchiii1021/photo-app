@@ -1,25 +1,9 @@
 <div class="page">
   <div class="forms">
     <h1 class="form-title">カテゴリー作成</h1>
+    
     <%= render 'categories/error_messages', model: @category %>
-    <div class="category-form">
-      <%= form_with model: @category, local: true do |f| %>
-        <div class="field form-group">
-          <%= f.label :category_name %><span class="required">必須</span><br />
-          <%= f.text_field :category_name, autofocus: true, autocomplete: "category_name", class: "input-field" %>
-        </div>
-
-        <div class="field form-group">
-          <%= f.label :category_image %><span class="required">必須</span><br />
-          <label class="form-image">
-            ファイルを選択
-            <%= f.file_field :category_image, autofocus: true, autocomplete: "image", class: "input-field field-image" %>
-          </label>
-        </div>
-
-        <%= f.submit "作成する", class: "btn btn-primary" %>
-      <% end %>
-    </div>
+    <%= render 'categories/category_form', model: @category %>
 
     <%= link_to "戻る", :back %>
   </div>

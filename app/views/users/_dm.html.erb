@@ -1,14 +1,16 @@
 <% if user_signed_in? %>
   <% unless @user.id == current_user.id %>
-    <% if @haveRoom == true %>
-      <%= link_to "チャットする", room_path(@room_id), class: "btn btn-primary user-btn"%>
-    <% else %>
-      <%= form_with model: @room, local: true do |f| %>
-        <%= fields_for @user_room do |ur| %>
-          <%= ur.hidden_field :user_id, value: @user.id %>
+    <div class="user-btn">
+      <% if @haveRoom == true %>
+        <%= link_to "チャットする", room_path(@room_id), class: "btn btn-primary"%>
+      <% else %>
+        <%= form_with model: @room, local: true do |f| %>
+          <%= fields_for @user_room do |ur| %>
+            <%= ur.hidden_field :user_id, value: @user.id %>
+          <% end %>
+          <%= f.submit "チャットを始める", class:"btn btn-primary"%>
         <% end %>
-        <%= f.submit "チャットを始める", class:"btn btn-primary user-btn"%>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
 <% end %>

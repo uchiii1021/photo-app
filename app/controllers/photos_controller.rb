@@ -12,16 +12,15 @@ class PhotosController < ApplicationController
     @comment = Comment.new
     @comments = @photo.comments
     @photo_exif = MiniExiftool.new(@photo.image.file.file)
-    @photo_exifR = Magick::ImageList.new(@photo.image.file.file)
-    if @photo_exifR.get_exif_by_entry('GPSLatitude').present? && @photo_exifR.get_exif_by_entry('GPSLongitude').present? && !@photo_exifR.get_exif_by_entry('GPSLatitude')[0][1].nil?
-      exif_lat = @photo_exifR.get_exif_by_entry('GPSLatitude')[0][1].split(',').map(&:strip)
-      exif_lng = @photo_exifR.get_exif_by_entry('GPSLongitude')[0][1].split(',').map(&:strip)
-      @lat = (Rational(exif_lat[0]) + Rational(exif_lat[1])/60 + Rational(exif_lat[2])/3600).to_f
-      @lng = (Rational(exif_lng[0]) + Rational(exif_lng[1])/60 + Rational(exif_lng[2])/3600).to_f
-      gon.lat = @lat
-      gon.lng = @lng
-    elsif @photo.spot.present?
-
+    # @photo_exifR = Magick::ImageList.new(@photo.image.file.file)
+    # if @photo_exifR.get_exif_by_entry('GPSLatitude').present? && @photo_exifR.get_exif_by_entry('GPSLongitude').present? && !@photo_exifR.get_exif_by_entry('GPSLatitude')[0][1].nil?
+    #   exif_lat = @photo_exifR.get_exif_by_entry('GPSLatitude')[0][1].split(',').map(&:strip)
+    #   exif_lng = @photo_exifR.get_exif_by_entry('GPSLongitude')[0][1].split(',').map(&:strip)
+    #   @lat = (Rational(exif_lat[0]) + Rational(exif_lat[1])/60 + Rational(exif_lat[2])/3600).to_f
+    #   @lng = (Rational(exif_lng[0]) + Rational(exif_lng[1])/60 + Rational(exif_lng[2])/3600).to_f
+    #   gon.lat = @lat
+    #   gon.lng = @lng
+    if @photo.spot.present?
       @lat = @photo.spot.latitude
       @lng = @photo.spot.longitude
       gon.lat = @lat

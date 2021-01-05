@@ -160,3 +160,72 @@ footer {
   padding: 5px;
   border-radius: 5px;
 }
+
+// ---------------フォームのデザイン---------------
+.forms {
+  width: 400px;
+  background: #fff;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
+
+.form-title {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+.input-field {
+  width: 100%;
+}
+
+.input-area {
+  resize: none;
+  width: 100%;
+  height: 100px;
+}
+
+.form-image {
+  padding: 5px;
+  background-color: #eeeeee;
+  border: 1px solid black;
+  border-radius: 3px;
+  &:hover { 
+    background-color: #e5e5e5;
+  }
+}
+
+.field-image {
+  display: none;
+}
+
+.btn {
+  width: 100%;  
+}
+
+.btn-info {
+  margin-bottom: 10px;
+}
+
+.btn-success {
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1250px) {
+  
+}
+
+@media screen and (max-width: 896px) {
+  
+}
+
+@media screen and (max-width: 480px) {
+  .forms {
+    width: 90%;
+  }
+}

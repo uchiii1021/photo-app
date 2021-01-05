@@ -39,145 +39,155 @@
       </div>
     </div>
 
-    <div class="photo-content__main-top">
+    <div class="photo-content__main">
+      <div class="photo-content__main-left">
 
-      <%= form_with model: @photo, local: true do |f| %>
-        <div class="photo-content__information">
-          <% if user_signed_in? && current_user.id == @photo.user_id %>
-            <div class="photo-content__title">
-              <%= f.text_field :title %>
-            </div>
-            <div class="photo-content__description">
-              <%= f.text_area :description, class: "description-input" %>
-            </div>
-            <div class="photo-categories">
-              <div class="photo-category"><%= f.label :category, 'カテゴリ' %></div>
-              <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name) do |category| %> 
-                <%= category.label do %>
-                  <%= category.check_box %>
-                  <%= category.text %>
+        <%= form_with model: @photo, local: true do |f| %>
+          <div class="photo-content__information">
+            <% if user_signed_in? && current_user.id == @photo.user_id %>
+              <div class="photo-content__title">
+                <%= f.text_field :title %>
+              </div>
+              <div class="photo-content__description">
+                <%= f.text_area :description, class: "description-input" %>
+              </div>
+              <div class="photo-categories">
+                <div class="photo-category"><%= f.label :category, 'カテゴリ' %></div>
+                <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name) do |category| %> 
+                  <%= category.label do %>
+                    <%= category.check_box %>
+                    <%= category.text %>
+                  <% end %>
                 <% end %>
+              </div>
+            <% else %>
+              <div class="photo-content__title">
+                <%= @photo.title %>
+              </div>
+              <div class="photo-content__description">
+                <%= safe_join(@photo.description.split("\n"),tag(:br)) %>
+              </div>
+              <div class="photo-categories">
+                <h4 class="photo-category">カテゴリ</h4>
+                <% @photo.categories.each do |photo| %>
+                  <%= photo.category_name %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="photo-spot">
+            <h4 class="spot-title">撮影場所</h4>
+            <% if user_signed_in? && current_user.id == @photo.user_id %>
+              <div class="spot-edit">
+                <%= f.fields_for :spot do |s| %>
+                  <%= s.text_field :address, placeholder: "撮影場所を入力", id: "address", class: 'spot__text' %>
+                <% end %>
+                <input type="button" value="検索する" onclick="codeAddress()" class='spot__text'>
+              </div>
+            <% end %>
+            <% if @photo.spot.present? %>
+              <div class=spot-address>
+                <%= @photo.spot.address %>
+              </div>
+              <div id='spot_map'>
+              </div>
+            <% end %>
+            <script>
+              let map
+              let geocoder
+              
+              function initMap(){
+                geocoder = new google.maps.Geocoder()
+                if(document.getElementById('map')){
+                  map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 35.6594666, lng: 139.7005536},
+                    zoom: 14,
+                  });
+                }else{
+                  map = new google.maps.Map(document.getElementById('spot_map'), {
+                    center: {lat: gon.lat, lng: gon.lng},
+                    zoom: 14,
+                  });
+
+                  marker = new google.maps.Marker({
+                    position:  {lat: gon.lat, lng: gon.lng},
+                    map: map
+                  });
+                }
+              }
+
+              function codeAddress(){
+                let inputAddress = document.getElementById('address').value;
+                geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+                  if (status == 'OK') {
+                    let lat = results[0].geometry.location.lat();
+                    let lng = results[0].geometry.location.lng();
+                    let mark = {
+                        lat: lat,
+                        lng: lng
+                    };
+                    map.setCenter(results[0].geometry.location);
+                    let marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                  } else {
+                    alert('該当する結果がありませんでした');
+                  }
+                });
+              }
+            </script>
+          </div>
+
+          <% if user_signed_in? && current_user.id == @photo.user_id %>
+            <%= f.submit '更新する', class:"btn btn-primary" %>
+          <% end %>
+
+        <% end %>
+      </div>
+      
+      <div class="photo-content__main-right">
+
+        <div class="exif-information">
+          <h4 class="exif-title">Exif情報</h4>
+          <ul class="photo-exifs">
+            <li class="photo-exif"><%= "メーカ：#{@photo_exif.make}" %></li>
+            <li class="photo-exif"><%= "モデル：#{@photo_exif.model}" %></li>
+            <li class="photo-exif"><%= "レンズ：#{@photo_exif.lens_model}" %></li>
+            <li class="photo-exif"><%= "撮影日：#{@photo_exif.date_time_original.strftime("%Y-%m-%d %H:%M:%S")}" %></li>
+            <li class="photo-exif"><%= "シャッタースピード：#{@photo_exif.exposure_time}" %></li>
+            <li class="photo-exif"><%= "F値：#{@photo_exif.f_number}" %></li>
+            <li class="photo-exif"><%= "焦点距離：#{@photo_exif.focal_length}" %></li>
+            <li class="photo-exif"><%= "ISO感度：#{@photo_exif.iso}" %></li>
+            <li class="photo-exif"><%= "緯度：#{@photo_exif.gps_latitude}" %></li>
+            <li class="photo-exif"><%= "経度：#{@photo_exif.gps_longitude}" %></li>
+          </ul>
+        </div>
+
+        <div class="photo-comment-boxs">
+          <div class="photo-comment-box">
+            <h4 class="comments-title">この写真へのコメント</h4>
+            <div class="photo-comments">
+              <% @comments.each do |comment| %>
+                <div class="photo-comment">
+                  <div class="photo-comment-user">
+                    <%= comment.user.name %><br>
+                  </div>
+                  <p><%= safe_join(comment.comment_content.split("\n"),tag(:br)) %></p>
+                </div>
               <% end %>
             </div>
-          <% else %>
-            <div class="photo-content__title">
-              <%= @photo.title %>
-            </div>
-            <div class="photo-content__description">
-              <%= safe_join(@photo.description.split("\n"),tag(:br)) %>
-            </div>
-            <div class="photo-categories">
-              <h4 class="photo-category">カテゴリ</h4>
-              <% @photo.categories.each do |photo| %>
-                <%= photo.category_name %>
+          </div>
+          <% if user_signed_in? %>
+            <div class="comment-form">
+              <%= form_with model: [@photo, @comment], local: true do |f| %>
+                <%= f.text_area :comment_content, class: "comment-form__input" %>
+                <%= f.submit 'コメントを送信する', class:"btn btn-primary" %>
               <% end %>
             </div>
           <% end %>
         </div>
-        <% if user_signed_in? && current_user.id == @photo.user_id %>
-          <%= f.submit '更新する', class:"btn btn-primary" %>
-        <% end %>
-      <% end %>
-
-      <div class="exif-information">
-        <h4 class="exif-title">Exif情報</h4>
-        <ul class="photo-exifs">
-          <li class="photo-exif"><%= "メーカ：#{@photo_exif.make}" %></li>
-          <li class="photo-exif"><%= "モデル：#{@photo_exif.model}" %></li>
-          <li class="photo-exif"><%= "レンズ：#{@photo_exif.lens_model}" %></li>
-          <li class="photo-exif"><%= "撮影日：#{@photo_exif.date_time_original.strftime("%Y-%m-%d %H:%M:%S")}" %></li>
-          <li class="photo-exif"><%= "シャッタースピード：#{@photo_exif.exposure_time}" %></li>
-          <li class="photo-exif"><%= "F値：#{@photo_exif.f_number}" %></li>
-          <li class="photo-exif"><%= "焦点距離：#{@photo_exif.focal_length}" %></li>
-          <li class="photo-exif"><%= "ISO感度：#{@photo_exif.iso}" %></li>
-          <li class="photo-exif"><%= "緯度：#{@photo_exif.gps_latitude}" %></li>
-          <li class="photo-exif"><%= "経度：#{@photo_exif.gps_longitude}" %></li>
-        </ul>
-      </div>
-
-    </div>
-    
-    <div class="photo-content__main-bottom">
-    
-      <div class="photo-spot">
-        <h4 class="spot-title">撮影場所</h4>
-        <% if @photo.spot.present? %>
-          <div class=spot-address>
-            <%= @photo.spot.address %>
-          </div>
-          <div id='spot_map'>
-          </div>
-        <% end %>
-        
-        <script>
-          let map
-          let geocoder
-          
-          function initMap(){
-            geocoder = new google.maps.Geocoder()
-            if(document.getElementById('map')){
-              map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 35.6594666, lng: 139.7005536},
-                zoom: 14,
-              });
-            }else{
-              map = new google.maps.Map(document.getElementById('spot_map'), {
-                center: {lat: gon.lat, lng: gon.lng},
-                zoom: 14,
-              });
-
-              marker = new google.maps.Marker({
-                position:  {lat: gon.lat, lng: gon.lng},
-                map: map
-              });
-            }
-          }
-
-          function codeAddress(){
-            let inputAddress = document.getElementById('address').value;
-            geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-              if (status == 'OK') {
-                let lat = results[0].geometry.location.lat();
-                let lng = results[0].geometry.location.lng();
-                let mark = {
-                    lat: lat,
-                    lng: lng
-                };
-                map.setCenter(results[0].geometry.location);
-                let marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-              } else {
-                alert('該当する結果がありませんでした');
-              }
-            });
-          }
-        </script>
-      </div>
-
-      <div class="photo-comment-boxs">
-        <div class="photo-comment-box">
-          <h4 class="comments-title">この写真へのコメント</h4>
-          <div class="photo-comments">
-            <% @comments.each do |comment| %>
-              <div class="photo-comment">
-                <div class="photo-comment-user">
-                  <%= comment.user.name %><br>
-                </div>
-                <p><%= safe_join(comment.comment_content.split("\n"),tag(:br)) %></p>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <% if user_signed_in? %>
-          <div class="comment-form">
-            <%= form_with model: [@photo, @comment], local: true do |f| %>
-              <%= f.text_area :comment_content, class: "comment-form__input" %>
-              <%= f.submit 'コメントを送信する', class:"btn btn-primary" %>
-            <% end %>
-          </div>
-        <% end %>
       </div>
     </div>
 

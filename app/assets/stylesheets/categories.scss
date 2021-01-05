@@ -1,0 +1,96 @@
+// ---------------カテゴリの作成・編集---------------
+
+// ---------------カテゴリ一覧---------------
+.categories {
+  display: grid;
+  grid-template-columns: 330px 330px 330px 330px;
+  justify-content: center;
+}
+
+.category {
+  height: 320px;
+  background-color: black;
+  border-radius: 10px;
+  box-shadow:0px 0px 5px;
+  margin: 10px;
+  padding: 10px;
+  flex-flow: column;
+}
+
+.category__image {
+  height: 200px;
+  margin-bottom: 5px;
+  .category__image-size {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+  }
+}
+
+.category__title {
+  color: #c0c0c0;
+  font-size: 25px;
+  font-weight: bold;
+  &:hover { 
+    text-decoration: underline;
+  }
+}
+
+.link-create-category {
+  width: 150px;
+  color: black;
+  font-size: 16px;
+  background-color: white;
+  padding: 15px 10px;
+  border-radius: 10px;
+  &:hover { 
+    color: white;
+    background-color: black;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .categories {
+    grid-template-columns: 330px 330px 330px;
+  }
+
+  .photo-content__main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .photo-content__main-left {
+    width: 100%;
+    margin-right: 0px;
+  }
+
+  .photo-content__information {
+    width: 100%;
+  }
+
+  .photo-spot {
+    width: 100%;
+  }
+
+  #spot_map {
+    width: 95%;
+  }
+
+  .photo-content__main-right {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 896px) {
+  .categories {
+    grid-template-columns: 330px 330px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .categories {
+    grid-template-columns: 330px;
+  }
+}
