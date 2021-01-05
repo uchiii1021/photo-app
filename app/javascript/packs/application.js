@@ -9,7 +9,6 @@ require("@rails/activestorage").start()
 require("channels")
 
 require("jquery")
-require("popper")
 require("bootstrap")
 
 require("underscore")
