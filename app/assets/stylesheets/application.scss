@@ -163,7 +163,7 @@ footer {
 
 // ---------------フォームのデザイン---------------
 .forms {
-  width: 400px;
+  width: 600px;
   background: #fff;
   padding: 20px;
   margin: 0 auto;
@@ -221,7 +221,9 @@ footer {
 }
 
 @media screen and (max-width: 896px) {
-  
+  .forms {
+    width: 400px;
+  }
 }
 
 @media screen and (max-width: 480px) {
