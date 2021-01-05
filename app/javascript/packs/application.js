@@ -10,7 +10,7 @@ require("channels")
 
 require("jquery")
 require("popper")
-require("bootstrap-sprockets")
+require("bootstrap")
 
 require("underscore")
 require("map/googlemap")
