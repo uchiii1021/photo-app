@@ -72,3 +72,7 @@ gem "gmaps4rails"
 gem "geocoder"
 gem "gon"
 gem "dotenv-rails"
+
+group :production do
+  gem 'rails_12factor'
+end
