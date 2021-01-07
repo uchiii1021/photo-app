@@ -62,6 +62,7 @@ gem 'devise-i18n-views'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'mini_exiftool'
+gem 'mini_exiftool_vendored'
 gem 'rmagick'
 
 gem 'devise'
