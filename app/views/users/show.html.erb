@@ -6,7 +6,7 @@
         <% if @user.image? %>
           <%= image_tag @user.image.url, class: "user-image-size" %>
         <% else %>
-          <%= image_tag asset_path("default.png"), class: "user-image-size" %>
+          <%= image_tag asset_path("user_default.png"), class: "user-image-size" %>
         <% end %>
       </div>
       <div class="user-information">

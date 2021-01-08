@@ -318,6 +318,14 @@
   }
 }
 
+#photo_prev {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
+}
+
 @media screen and (max-width: 1250px) {
   .photos-box {
     grid-template-columns: 320px 320px;

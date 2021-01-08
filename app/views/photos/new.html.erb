@@ -3,25 +3,37 @@
     <h1 class="form-title">新規投稿</h1>
     <%= render 'photos/error_messages', model: @photo %>
     <%= form_with model: @photo, local: true, multipart: true do |f| %>
+      
+      <!-- 画像タイトル -->
       <div class="field form-group">
         <%= f.label :title %><span class="required">必須</span><br />
         <%= f.text_field :title, autofocus: true, autocomplete: "title", class: "input-field" %>
         <p>(10文字以内)</p>
       </div> 
 
+      <!-- 画像説明 -->
       <div class="field form-group">
         <%= f.label :description %><br />
         <%= f.text_area :description, autofocus: true, autocomplete: "description", class: "input-area" %>
       </div>
 
+      <!-- 画像選択 -->
       <div class="field form-group">
         <%= f.label :image %><span class="required">必須</span><br />
         <label class="form-image">
           ファイルを選択
-          <%= f.file_field :image, autofocus: true, autocomplete: "image", class: "input-field field-image" %>
+          <%= f.file_field :image, autofocus: true, autocomplete: "image", class: "input-field field-image", id: "field-image" %>
         </label>
+        <div class="img_prev">
+          <% if @photo.image? %>
+            <%= image_tag @photo.image.url, id: "img_prev" %>
+          <% else %>
+            <%= image_tag asset_path("img_default.png"), id: "photo_prev" %>
+          <% end %>
+        </div>
       </div>
 
+      <!-- カテゴリ選択 -->
       <div class="field form-group">
         <%= f.label :category %><br />
         <%= f.collection_check_boxes(:category_ids, Category.all, :id, :category_name) do |category| %> 
@@ -31,7 +43,8 @@
           <% end %>
         <% end %>
       </div>
-      
+
+      <!-- 撮影場所 -->
       <div class="spot">
         <%= f.fields_for :spot do |s| %>
           <%= s.label :address, "撮影場所(Google Mapで検索)", class: 'spot__title' %><br>

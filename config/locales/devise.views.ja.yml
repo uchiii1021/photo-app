@@ -2,8 +2,8 @@ ja:
   activerecord:
     attributes:
       user:
-        name: "名前"
-        image: "画像"
+        name: 名前
+        image: 画像
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻
@@ -27,6 +27,7 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+        profile: 紹介文
     models:
       user: ユーザ
   devise:

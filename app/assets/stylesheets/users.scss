@@ -143,3 +143,18 @@ input[name="tab_item"] {
 #follower:checked ~ #follower__content {
   display: block;
 }
+
+// ---------------ユーザ編集画面---------------
+.img_prev {
+  width: 100%;
+  text-align: center;
+}
+
+#user_prev {
+  width: 30%;
+  height: auto;
+  max-height: 200px;
+  margin: 10px auto 20px; 
+  object-fit: cover;
+  object-position: center;
+}

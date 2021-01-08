@@ -1,4 +1,11 @@
 // ---------------カテゴリの作成・編集---------------
+#category_prev {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
+}
 
 // ---------------カテゴリ一覧---------------
 .categories {

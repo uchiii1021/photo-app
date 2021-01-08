@@ -127,6 +127,7 @@
                         lat: lat,
                         lng: lng
                     };
+                    
                     map.setCenter(results[0].geometry.location);
                     let marker = new google.maps.Marker({
                         map: map,
@@ -135,6 +136,12 @@
                   } else {
                     alert('該当する結果がありませんでした');
                   }
+
+                  if(marker != null){
+                    marker.setMap(null);
+                  }
+                  marker = null;
+
                 });
               }
             </script>
@@ -154,12 +161,12 @@
           <ul class="photo-exifs">
             <li class="photo-exif"><%= "メーカ：#{@photo_exif.make}" %></li>
             <li class="photo-exif"><%= "モデル：#{@photo_exif.model}" %></li>
-            <li class="photo-exif"><%= "レンズ：#{@photo_exif.lens_model}" %></li>
-            <li class="photo-exif"><%= "撮影日：#{@photo_exif.date_time_original.strftime("%Y-%m-%d %H:%M:%S")}" %></li>
-            <li class="photo-exif"><%= "シャッタースピード：#{@photo_exif.exposure_time}" %></li>
+            <li class="photo-exif"><%= "撮影日：#{@photo_exif.date_time_original&.strftime("%Y-%m-%d %H:%M:%S")}" %></li>
+            <li class="photo-exif"><%= "露出時間：#{@photo_exif.exposure_time}" %></li>
             <li class="photo-exif"><%= "F値：#{@photo_exif.f_number}" %></li>
             <li class="photo-exif"><%= "焦点距離：#{@photo_exif.focal_length}" %></li>
             <li class="photo-exif"><%= "ISO感度：#{@photo_exif.iso}" %></li>
+            <li class="photo-exif"><%= "露出補正値：#{@photo_exif.exposure_compensation}" %></li>
             <li class="photo-exif"><%= "緯度：#{@photo_exif.gps_latitude}" %></li>
             <li class="photo-exif"><%= "経度：#{@photo_exif.gps_longitude}" %></li>
           </ul>
