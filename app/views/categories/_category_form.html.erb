@@ -8,16 +8,16 @@
     <div class="field form-group">
       <%= f.label :category_image %><span class="required">必須</span><br />
       <label class="form-image">
-          ファイルを選択
-          <%= f.file_field :image, autofocus: true, autocomplete: "image", class: "input-field field-image", id: "field-image" %>
-        </label>
-        <div class="img_prev">
-          <% if @category.category_image? %>
-            <%= image_tag @category.category_image.url, id: "img_prev" %>
-          <% else %>
-            <%= image_tag asset_path("img_default.png"), id: "category_prev" %>
-          <% end %>
-        </div>
+        ファイルを選択
+        <%= f.file_field :category_image, autofocus: true, autocomplete: "category_image", class: "input-field field-image", id: "field-image" %>
+      </label>
+      <div class="img_prev">
+        <% if @category.category_image? %>
+          <%= image_tag @category.category_image.url, id: "category_prev" %>
+        <% else %>
+          <%= image_tag asset_path("img_default.png"), id: "category_prev" %>
+        <% end %>
+      </div>
     </div>
 
     <%= f.submit class: "btn btn-primary" %>
