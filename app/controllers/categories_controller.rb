@@ -32,10 +32,11 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    @category = Category.find(params[:id])
     @category.destroy
     redirect_to categories_url
   end
-
+  
   private
   def category_params
     params.require(:category).permit(:category_name, :category_image, photo_ids: [])
