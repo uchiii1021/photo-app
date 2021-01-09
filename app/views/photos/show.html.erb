@@ -175,23 +175,13 @@
         <div class="photo-comment-boxs">
           <div class="photo-comment-box">
             <h4 class="comments-title">この写真へのコメント</h4>
-            <div class="photo-comments">
-              <% @comments.each do |comment| %>
-                <div class="photo-comment">
-                  <div class="photo-comment-user">
-                    <%= comment.user.name %><br>
-                  </div>
-                  <p><%= safe_join(comment.comment_content.split("\n"),tag(:br)) %></p>
-                </div>
-              <% end %>
+            <div id="comments_area" class="photo-comments">
+              <%= render partial: 'comments/index', locals: { comments: @comments } %>
             </div>
           </div>
           <% if user_signed_in? %>
             <div class="comment-form">
-              <%= form_with model: [@photo, @comment], local: true do |f| %>
-                <%= f.text_area :comment_content, class: "comment-form__input" %>
-                <%= f.submit 'コメントを送信する', class:"btn btn-primary" %>
-              <% end %>
+              <%= render partial: 'comments/form', locals: { comment: @comment, photo: @photo } %>
             </div>
           <% end %>
         </div>

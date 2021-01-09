@@ -1,0 +1,4 @@
+$("#comments_area").html("<%= j(render 'comments/index', { comments: @comment.photo.comments }) %>")
+$("textarea").val('')
+
+$("#comments_area").animate({ scrollTop: $("#comments_area")[0].scrollHeight});

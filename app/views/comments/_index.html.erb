@@ -1,0 +1,8 @@
+<% comments.each do |comment| %>
+  <div class="photo-comment">
+    <div class="photo-comment-user">
+      <%= comment.user.name %><br>
+    </div>
+    <p><%= safe_join(comment.comment_content.split("\n"),tag(:br)) %></p>
+  </div>
+<% end %>

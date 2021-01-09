@@ -5,8 +5,14 @@ class CommentsController < ApplicationController
     @comment = @photo.comments.new(comment_params)
     @comment.user_id = current_user.id
     @comment.save
-    if @comment.save
-      redirect_to photo_path(@photo)
+    respond_to do |format|
+      if @comment.save
+        format.html {redirect_to photo_path(@photo)}
+        format.js { render :index }
+      else
+        format.html {redirect_to photo_path(@photo)}
+        format.js { render :index }
+      end
     end
   end
 
