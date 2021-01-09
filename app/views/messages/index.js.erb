@@ -1,0 +1,4 @@
+$("#messages_area").html("<%= j(render 'messages/index', { messages: @message.room.messages }) %>")
+$("textarea").val('')
+
+$('html要素').animate({ scrollTop: $('html要素')[0].scrollHeight});

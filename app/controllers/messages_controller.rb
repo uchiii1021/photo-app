@@ -4,7 +4,15 @@ class MessagesController < ApplicationController
   def create
     if UserRoom.where(user_id: current_user.id, room_id: params[:message][:room_id]).present?
       @message = Message.create(message_params)
-      redirect_to room_url(@message.room_id)
+      respond_to do |format|
+        if @message.save
+          format.html {room_url(@message.room_id)}
+          format.js { render :index }
+        else
+          format.html {room_url(@message.room_id)}
+          format.js { render :index }
+        end
+      end
     else
       redirect_back(fallback_location: root_path)
     end

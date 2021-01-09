@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" id="page">
   <div class="room-form">
     <h1 class="form-title">DM</h1>
     <h3 class="room-user">
@@ -10,37 +10,11 @@
         <% end %>
       <% end %>
     </h3>
-
-    <% if @messages.present? %>
-      <% @messages.each do |m| %>
-        <div class="messages">
-          <% if m.message_content? %>
-            <% if m.user_id == current_user.id %>
-              <div class="right-messages">
-                <div class="right-message">
-                <p class="message"><%=safe_join(m.message_content.split("\n"),tag(:br))%></p>
-                </div>
-              </div>
-            <% else %>
-              <div class="left-messages">
-                <div class="left-message">
-                  <p class="message"><%=safe_join(m.message_content.split("\n"),tag(:br))%></p>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-    <% else %>
-      <h3 class="text-center">メッセージはまだありません</h3>
-    <% end %>
-
-    
-      <%= form_with model: @message, local: true do |f| %>
-        <%= f.text_area :message_content, placeholder: "メッセージを入力して下さい", class: "input-area" %><br />
-        <%= f.hidden_field :room_id, value: @room.id %>
-        <%= f.submit '送信', class: "btn btn-primary" %>
-      <% end %>
-    
+    <div id="messages_area">
+      <%= render partial: 'messages/index', locals: { messages: @messages } %>
+    </div>
+    <div id="message_form">
+      <%= render partial: 'messages/form', locals: { message: @message, room: @room } %>
+    </div>
   </div>
 </div>
