@@ -49,6 +49,8 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
   database: photo_app_production
   username: photo_app
   password: <%= ENV['PHOTO_APP_DATABASE_PASSWORD'] %>
