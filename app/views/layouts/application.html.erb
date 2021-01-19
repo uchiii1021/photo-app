@@ -37,6 +37,29 @@
           <li><%= link_to "ログイン", new_user_session_path, class: "my-menu__list" %></li>
         <% end %>
       </ul>
+      <button type="button" class="btn js-btn">
+        <span class="fa fa-bars"></span>
+      </button>
+      <nav class="menu-icon">
+        <ul class="menu">
+          <li><%= link_to "カテゴリー", categories_path, class: "menu-list" %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "マイページ", user_path(current_user.id), class: "menu-list" %></li>
+            <li><%= link_to "新規投稿", new_photo_path, class: "menu-list" %></li>
+            <li><%= link_to "ログアウト", logout_path, method: :delete, class: "menu-list" %></li>
+          <% else %>
+            <li><%= link_to "新規登録", new_user_registration_path, class: "menu-list" %></li>
+            <li><%= link_to "ログイン", new_user_session_path, class: "menu-list" %></li>
+          <% end %>
+        </ul>
+      </nav>
+      <script>
+        $(function () {
+          $('.js-btn').on('click', function () { 
+            $('.menu-icon').toggleClass('open');
+          })
+        });
+      </script>
       
     </header>
     <!---
