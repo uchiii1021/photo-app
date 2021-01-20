@@ -1,5 +1,5 @@
 class Photo < ApplicationRecord
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, PhotoUploader
 
   validates :title, presence: true, length: { maximum: 10 }
   validates :image, presence: true
