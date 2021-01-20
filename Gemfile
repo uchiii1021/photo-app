@@ -64,8 +64,6 @@ gem 'mini_magick'
 gem 'mini_exiftool'
 gem 'mini_exiftool_vendored'
 gem 'rmagick'
-gem 'cloudinary' , '1.11.1'
-
 gem 'devise'
 
 gem 'pry-rails'
