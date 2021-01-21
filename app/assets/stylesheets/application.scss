@@ -242,12 +242,14 @@ footer {
     right: -70%;
     width: 50%;
     height: 100vh;
+    padding-top: 70px;
     display: block;
     color: white;
     font-size: 30px;
     display: flex;
     flex-direction: column;
     background-color: #606060;
+    opacity: 0.9;
   }
 
   .menu-icon.open {
