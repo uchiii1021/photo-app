@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :current_password
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, UserUploader
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
